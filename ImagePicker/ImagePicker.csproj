@@ -215,6 +215,10 @@
     <Compile Include="Migrations\201703230743508_InitialCreate.Designer.cs">
       <DependentUpon>201703230743508_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703230804283_add-column-Code-to-AspNetUsers-table.cs" />
+    <Compile Include="Migrations\201703230804283_add-column-Code-to-AspNetUsers-table.Designer.cs">
+      <DependentUpon>201703230804283_add-column-Code-to-AspNetUsers-table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -295,6 +299,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201703230743508_InitialCreate.resx">
       <DependentUpon>201703230743508_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703230804283_add-column-Code-to-AspNetUsers-table.resx">
+      <DependentUpon>201703230804283_add-column-Code-to-AspNetUsers-table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

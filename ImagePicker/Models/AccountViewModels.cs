@@ -70,6 +70,11 @@ namespace ImagePicker.Models
         public string Email { get; set; }
 
         [Required]
+        [Range(1000, 9999, ErrorMessage = "Please enter valid integer Number")]
+        [Display(Name = "Code")]
+        public int Code { get; set; }
+
+        [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
