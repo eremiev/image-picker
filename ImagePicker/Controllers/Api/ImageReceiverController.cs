@@ -25,20 +25,42 @@ namespace ImagePicker.Controllers.Api
             {
                 return BadRequest(ModelState);
             }
-            var user = db.Users.Where(u => u.Code == imageReceiver.Code).FirstOrDefault();
-            Phone ph = new Phone();
-            ph.UniqueID = imageReceiver.UniqueID;
+            try
+            {
+                ApplicationUser user = db.Users.Where(u => u.Code == imageReceiver.Code).FirstOrDefault();
+                if (user == null)
+                    return NotFound();
 
-            user.Phones.Add(ph);
-            //Phone test = (Phone)user.Phones;
-            //Image im = new Image();
-            //im.Base64 = imageReceiver.Base64;
-            //im.Path = imageReceiver.Path;
-            //test.Images.Add(im);
+                List<Phone> phone = user.Phones.Where(p => p.UniqueID == imageReceiver.UniqueID).ToList();
+                Image image = new Image() { Base64 = imageReceiver.Base64, Path = imageReceiver.Path };
+                List<Image> imageList = new List<Image>();
+                imageList.Add(image);
 
-            await db.SaveChangesAsync();
+                //if phone not exist
+                if (phone.Count() == 0)
+                {
+                    Phone phoneModel = new Phone() { UniqueID = imageReceiver.UniqueID, Images = imageList };
+                    user.Phones.Add(phoneModel);
+                }
+                else
+                {
+                    phone.FirstOrDefault()
+                        .Images
+                        .Add(new Image()
+                        {
+                            Base64 = imageReceiver.Base64,
+                            Path = imageReceiver.Path,
+                            PhoneID = phone.FirstOrDefault().ID
+                        });
+                }
 
-            return CreatedAtRoute("DefaultApi", new { id = imageReceiver.Code }, imageReceiver);
+                await db.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                return BadRequest("Error: " + e.Message + " StackTrace: " + e.StackTrace);
+            }
+            return Ok();
         }
 
         private bool PhoneExists(int id)
