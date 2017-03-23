@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
 namespace ImagePicker.Models
 {
@@ -12,6 +13,8 @@ namespace ImagePicker.Models
     {
         [Required]
         public int Code { get; set; }
+
+        public virtual ICollection<Phone> Phones { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
@@ -28,6 +31,9 @@ namespace ImagePicker.Models
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
+
+        public DbSet<Phone> Phones { get; set; }
+        public DbSet<Image> Images { get; set; }
 
         public static ApplicationDbContext Create()
         {

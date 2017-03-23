@@ -219,10 +219,20 @@
     <Compile Include="Migrations\201703230804283_add-column-Code-to-AspNetUsers-table.Designer.cs">
       <DependentUpon>201703230804283_add-column-Code-to-AspNetUsers-table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703230836305_add-Phone-and-Image-table.cs" />
+    <Compile Include="Migrations\201703230836305_add-Phone-and-Image-table.Designer.cs">
+      <DependentUpon>201703230836305_add-Phone-and-Image-table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703230857543_add-UserID-to-Phone-table.cs" />
+    <Compile Include="Migrations\201703230857543_add-UserID-to-Phone-table.Designer.cs">
+      <DependentUpon>201703230857543_add-UserID-to-Phone-table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Image.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Phone.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -302,6 +312,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703230804283_add-column-Code-to-AspNetUsers-table.resx">
       <DependentUpon>201703230804283_add-column-Code-to-AspNetUsers-table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703230836305_add-Phone-and-Image-table.resx">
+      <DependentUpon>201703230836305_add-Phone-and-Image-table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703230857543_add-UserID-to-Phone-table.resx">
+      <DependentUpon>201703230857543_add-UserID-to-Phone-table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
