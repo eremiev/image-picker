@@ -9,7 +9,7 @@ namespace ImagePicker.Models
     {
         public int Code { get; set; }
         public string UniqueID { get; set; }
-        public string Path { get; set; }
+        public string Name { get; set; }
         public string Base64 { get; set; }
     }
 }

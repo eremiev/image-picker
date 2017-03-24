@@ -10,6 +10,10 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using ImagePicker.Models;
+using System.IO;
+using System.Web;
+
+
 
 namespace ImagePicker.Controllers.Api
 {
@@ -31,8 +35,17 @@ namespace ImagePicker.Controllers.Api
                 if (user == null)
                     return NotFound();
 
+                string imageName = imageReceiver.Name;
+                var uploadDir = "~/Content/uploads/" + user.Id + "/" + imageReceiver.UniqueID + "/";
+                var imagePath = Path.Combine(HttpContext.Current.Server.MapPath(uploadDir), imageName);
+                var imageUrl = Path.Combine(uploadDir, imageName);
+                if (!Directory.Exists(uploadDir))
+                    Directory.CreateDirectory(HttpContext.Current.Server.MapPath(uploadDir));
+
+                File.WriteAllBytes(imagePath, Convert.FromBase64String(imageReceiver.Base64));
+
                 List<Phone> phone = user.Phones.Where(p => p.UniqueID == imageReceiver.UniqueID).ToList();
-                Image image = new Image() { Base64 = imageReceiver.Base64, Path = imageReceiver.Path };
+                Image image = new Image() { Path = imagePath };
                 List<Image> imageList = new List<Image>();
                 imageList.Add(image);
 
@@ -48,8 +61,7 @@ namespace ImagePicker.Controllers.Api
                         .Images
                         .Add(new Image()
                         {
-                            Base64 = imageReceiver.Base64,
-                            Path = imageReceiver.Path,
+                            Path = imagePath,
                             PhoneID = phone.FirstOrDefault().ID
                         });
                 }
